@@ -122,3 +122,54 @@ kubectl run -it --generator=run-pod/v1 --image=nicolaka/netshoot --overrides='{ 
 
 kubectl expose deployment hello-kube --type=NodePort --name=hello-kube-service
 ```
+
+```sh
+# 기본 네임스페이스 변경 -> kubens(https://raw.githubusercontent.com/abmetb/kubectx/master/kubens)를 사용해도 됨
+
+# 현재 context 확인
+$ kubectl config current-context
+
+    kubernetes-admin@cluster.local
+
+# context 정보 확인
+$ kubectl config get-contexts kubernetes-admin@cluster.local
+
+    CURRENT   NAME                             CLUSTER         AUTHINFO           NAMESPACE
+    *         kubernetes-admin@cluster.local   cluster.local   kubernetes-admin
+
+# 네임스페이스 변경
+$ kubectl config set-context kubernetes-admin@cluster.local --namespace=deepphi
+    
+    Context "kubernetes-admin@cluster.local" modified.
+
+# 변경 확인
+$ kubectl config view
+
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: DATA+OMITTED
+        server: https://10.0.0.131:6443
+    name: cluster.local
+    contexts:
+    - context:
+        cluster: cluster.local
+        namespace: deepphi
+        user: kubernetes-admin
+    name: kubernetes-admin@cluster.local
+    current-context: kubernetes-admin@cluster.local
+    kind: Config
+    preferences: {}
+    users:
+    - name: kubernetes-admin
+    user:
+        client-certificate-data: REDACTED
+        client-key-data: REDACTED
+```
+
+```sh
+# api 버전 확인
+$ kubectl api-versions
+```
+
+### 
