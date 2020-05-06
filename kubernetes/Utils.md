@@ -17,3 +17,7 @@ k9s
 # 종료
 Ctrl+C
 ```
+
+![명령 입력](../img/0005.png)
+![Pod 목록](../img/0003.png)
+![Pod Log](../img/0004.png)
